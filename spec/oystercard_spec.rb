@@ -52,8 +52,7 @@ describe Oystercard do
     end
   end
 
-  context '#entry_station' do
-
+  xcontext '#entry_station' do
     it 'records the entry_station on card' do
       oyster.top_up(10)
       oyster.touch_in(entry_station)
@@ -81,15 +80,13 @@ describe Oystercard do
       message = "You cannot touch in without having the minimum fare on your card"
       expect{oyster.touch_in(entry_station)}.to raise_error message
     end
-
   end
 
-  context "journey history" do
-
-    it "checks that the card has an empty list of journeys by default" do
-      expect(oyster.journey_history).to eq []
-    end
-
-  end
+  # context "journey history" do
+  #
+  #   it "checks that the card has an empty list of journeys by default" do
+  #     expect(oyster.journey_history).to eq []
+  #   end
+  # end
 
 end
