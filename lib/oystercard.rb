@@ -1,17 +1,15 @@
+require'journey'
+
 class Oystercard
 
   MINIMUM_BALANCE = 1
   MAXIMUM_BALANCE = 90
 
-  attr_accessor :balance
-  attr_reader :entry_station, :exit_station, :journey_history
-
+  attr_accessor :balance, :journey
 
   def initialize
+    @journey = Journey.new
     @balance = 0
-    @entry_station = nil
-    @exit_station = nil
-    @journey_history = []
   end
 
   def top_up(amount)
@@ -23,33 +21,15 @@ class Oystercard
     self.balance = balance - amount
   end
 
-  def touch_in(entry_station)
+  def touch_in
     message = "You cannot touch in without having the minimum fare on your card"
     raise message if balance < MINIMUM_BALANCE
-    @entry_station = entry_station
   end
 
-  def touch_out(exit_station)
+  def touch_out
     message = "You can only touch out if you already touched in"
-    raise message unless has_entry_station?
+    raise message unless self.journey.journey_started
     deduct(MINIMUM_BALANCE)
-    @exit_station = exit_station
-    journey
-    add_to_history
-  end
-
-  def journey
-    @new_journey = {@entry_station => @exit_station}
-  end
-
-  def add_to_history
-    @journey_history << @new_journey
-  end
-
-  private
-
-  def has_entry_station?
-    @entry_station != nil
   end
 
 end
