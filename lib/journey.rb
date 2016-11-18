@@ -39,6 +39,7 @@ end
 def end_journey(exit_station)
   self.journey_finished = true
   record_exit_station(exit_station)
+  add_to_history
 end
 
 def record_exit_station(exit_station)
@@ -55,12 +56,13 @@ def fare
   MINIMUM_FARE
 end
 
-def journey
+def new_journey
   journey_completed?
   @new_journey = {@entry_station => @exit_station}
 end
 
 def add_to_history
+  new_journey
   @journey_history << @new_journey
 end
 
