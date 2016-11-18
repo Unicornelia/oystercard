@@ -36,8 +36,6 @@ describe Oystercard do
     end
   end
 
-
-
   context 'deduct_money' do
 
     before(:each) do
@@ -46,7 +44,7 @@ describe Oystercard do
 
     it "should deduct minimum fare from balance at touch out" do
       oyster.touch_in(entry_station)
-      expect{oyster.touch_out(exit_station)}.to change{oyster.balance}.by(-Oystercard::MINIMUM_FARE)
+      expect{oyster.touch_out(exit_station)}.to change{oyster.balance}.by(-Oystercard::MINIMUM_BALANCE)
     end
   end
 

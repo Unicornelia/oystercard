@@ -28,5 +28,11 @@ describe Journey do
       expect(journey.journey_finished).to eq false
     end
 
+    it 'expects to return true once the journey has been completed' do
+      journey.begin_journey
+      journey.end_journey
+      expect(journey.journey_completed?).to eq true
+    end
+
   end
 end

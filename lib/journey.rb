@@ -11,6 +11,8 @@
 
 class Journey
 
+MINIMUM_FARE = 1
+
   attr_accessor :journey_started, :journey_finished
 
   def initialize
@@ -25,6 +27,14 @@ end
 def end_journey
   self.journey_finished = true
 end
+
+def journey_completed?
+  return true if self.journey_started && self.journey_finished
+  false
+end
+
+# def fare
+# end
 
 
 end

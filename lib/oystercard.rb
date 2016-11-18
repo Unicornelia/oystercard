@@ -1,6 +1,6 @@
 class Oystercard
 
-  MINIMUM_FARE = 1
+  MINIMUM_BALANCE = 1
   MAXIMUM_BALANCE = 90
 
   attr_accessor :balance
@@ -25,14 +25,14 @@ class Oystercard
 
   def touch_in(entry_station)
     message = "You cannot touch in without having the minimum fare on your card"
-    raise message if balance < MINIMUM_FARE
+    raise message if balance < MINIMUM_BALANCE
     @entry_station = entry_station
   end
 
   def touch_out(exit_station)
     message = "You can only touch out if you already touched in"
     raise message unless has_entry_station?
-    deduct(MINIMUM_FARE)
+    deduct(MINIMUM_BALANCE)
     @exit_station = exit_station
     journey
     add_to_history
