@@ -3,10 +3,8 @@ class Oystercard
   MINIMUM_FARE = 1
   MAXIMUM_BALANCE = 90
 
-  attr_reader :balance
-
-      attr_writer :balance
-      attr_reader :entry_station, :journey_history, :exit_station
+  attr_accessor :balance
+  attr_reader :entry_station, :exit_station, :journey_history
 
 
   def initialize
@@ -18,11 +16,11 @@ class Oystercard
 
   def top_up(amount)
     raise 'The card has reached its maximum, no more top up' if balance + amount > MAXIMUM_BALANCE
-    @balance = balance + amount
+    self.balance = balance + amount
   end
 
   def deduct(amount)
-    @balance = balance - amount
+    self.balance = balance - amount
   end
 
   def touch_in(entry_station)
@@ -36,9 +34,11 @@ class Oystercard
     raise message unless has_entry_station?
     deduct(MINIMUM_FARE)
     @exit_station = exit_station
+    journey
+    add_to_history
   end
 
-  def journey(entry_station, exit_station)
+  def journey
     @new_journey = {@entry_station => @exit_station}
   end
 
