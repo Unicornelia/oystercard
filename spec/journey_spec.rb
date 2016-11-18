@@ -21,14 +21,6 @@ describe Journey do
       expect(journey.journey_finished).to eq true
     end
 
-    it 'expects the Journey to have journey started (set to false) attributes' do
-      expect(journey.journey_started).to eq false
-    end
-
-    it 'expects the Journey to have journey finished (set to false) attributes' do
-      expect(journey.journey_finished).to eq false
-    end
-
     it 'expects to return true once the journey has been completed' do
       journey.begin_journey(entry_station)
       journey.end_journey(exit_station)
